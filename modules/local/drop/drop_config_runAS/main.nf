@@ -40,6 +40,8 @@ process DROP_CONFIG_RUN_AS {
 
     drop init
 
+    sed -i 's#raw-local-{dataset}#raw-{dataset}#' Scripts/AberrantSplicing/pipeline/Counting/exportCounts.R
+
     drop_config.py \\
         --genome_fasta ${fasta} \\
         --gtf ${gtf}\\
