@@ -57,6 +57,9 @@ process DROP_CONFIG_RUN_AS {
 
     snakemake aberrantSplicing --cores ${task.cpus} --rerun-triggers mtime $args
 
+    sed 's#raw-local-{dataset}#raw-{dataset}#g' Scripts/AberrantSplicing/pipeline/Counting/exportCounts.R > Scripts/AberrantSplicing/pipeline/Counting/exportCounts-tmp.R
+    mv Scripts/AberrantSplicing/pipeline/Counting/exportCounts-tmp.R Scripts/AberrantSplicing/pipeline/Counting/exportCounts.R
+
     if [[ $skip_export_counts_drop == false ]]; then
         snakemake exportCounts --cores 1
         mkdir -p exported_counts_as
